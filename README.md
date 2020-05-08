@@ -1,6 +1,6 @@
 
-![Alt text](src/statics/list.svg)
-<img src="src/statics/list.svg">
+![Alt text](src/statics/icons/list.svg)
+<img src="src/statics/icons/list.svg">
 
 # bSoftware's DayTimeBooker (day-time-booker)
 
