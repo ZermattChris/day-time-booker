@@ -222,6 +222,11 @@ export default {
 </script>
 
 <style>
+  /* Set the Base font scaling size for the component here */
+  #DTBContainer {
+    font-size: 20px;
+  }
+
   .disable-text-selection {
     -moz-user-select: none; /* Firefox */
     -ms-user-select: none; /* Internet Explorer */
