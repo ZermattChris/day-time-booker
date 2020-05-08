@@ -1,6 +1,7 @@
-# Quasar App (daylist-v0.2.1)
+# bSoftware's DayTimeBooker (day-time-booker)
 
-A Quasar Framework app
+A Vue.js Component built on top of Quasar UI (project is using the Quasar CLI) and with 
+a few individual UI components from Vuesax.
 
 ## Install the dependencies
 ```bash

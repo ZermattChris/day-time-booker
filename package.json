@@ -1,8 +1,8 @@
 {
-  "name": "daylist",
-  "version": "0.4",
+  "name": "daytimebooker",
+  "version": "0.5",
   "description": "Building a component to learn Vue.js and prep for FLYZermatt's online booking system",
-  "productName": "bSoftware's DayList",
+  "productName": "bSoftware's DayTimeBooker",
   "cordovaId": "org.cordova.quasar.app",
   "capacitorId": "",
   "author": "Chris Banford <chris@bsoft.ch>",
