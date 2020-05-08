@@ -7,6 +7,9 @@ A Vue.js Component built on top of Quasar UI (project is using the Quasar CLI) a
 a few individual UI components from Vuesax.
 
 ### Live Demo {master}
+<p align="center">
+    ![https://bsoftware-daytimebooker.netlify.app/]<img src="src/statics/v0.5.6.png">
+</p>
 [bsoftware-daytimebooker.netlify.app](https://bsoftware-daytimebooker.netlify.app/)
 
 ## Install the dependencies
