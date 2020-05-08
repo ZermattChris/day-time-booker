@@ -8,7 +8,7 @@ a few individual UI components from Vuesax.
 
 ### Live Demo {master}
 <p align="center">
-    ![<img src="src/statics/v0.5.6.png">](https://bsoftware-daytimebooker.netlify.app/)
+    <img src="src/statics/v0.5.6.png">
 </p>
 [bsoftware-daytimebooker.netlify.app](https://bsoftware-daytimebooker.netlify.app/)
 
