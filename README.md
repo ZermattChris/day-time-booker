@@ -1,5 +1,8 @@
 # bSoftware's DayTimeBooker (day-time-booker)
 
+![Alt text](./statics/list.svg)
+<img src="./statics/list.svg">
+
 A Vue.js Component built on top of Quasar UI (project is using the Quasar CLI) and with 
 a few individual UI components from Vuesax.
 
