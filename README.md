@@ -1,5 +1,5 @@
 
-<img src="src/statics/icons/list.svg"> <img src="src/statics/plus.svg"> <img src="src/statics/vuejs-logo.png"> <img src="src/statics/plus.svg"> <img src="src/statics/quasar-logo.png">
+<img src="src/statics/list.svg"> <img src="src/statics/plus.svg"> <img src="src/statics/vuejs-logo.png"> <img src="src/statics/plus.svg"> <img src="src/statics/quasar-logo.svg">
 
 # bSoftware's DayTimeBooker (day-time-booker)
 
