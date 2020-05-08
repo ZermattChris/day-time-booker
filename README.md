@@ -6,6 +6,11 @@
 A Vue.js Component built on top of Quasar UI (project is using the Quasar CLI) and with 
 a few individual UI components from Vuesax.
 
+### Live Demo {master}
+```bash
+https://bsoftware-daytimebooker.netlify.app/
+```
+
 ## Install the dependencies
 ```bash
 yarn
@@ -14,11 +19,6 @@ yarn
 ### Start the app in development mode (hot-code reloading, error reporting, etc.)
 ```bash
 quasar dev
-```
-
-### Lint the files
-```bash
-yarn run lint
 ```
 
 ### Build the app for production
