@@ -10,7 +10,7 @@ a few individual UI components from Vuesax.
 <p align="center">
     <img src="src/statics/v0.5.6.png">
 </p>
-[bsoftware-daytimebooker.netlify.app](https://bsoftware-daytimebooker.netlify.app/)
+(https://bsoftware-daytimebooker.netlify.app/)
 
 ## Install the dependencies
 ```bash

@@ -1,127 +1,133 @@
 <template>
   <div id="q-app" class="q-pa-md">
 
-    <!-- This is our custom component to mimic an EasyJet style of booking -->
-    <!-- Flight Nr/Slots for a given day. -->
-    <!-- v-bind:timeSlots Pass in an array of times to use when rendering each row. -->
-    <!-- v-on: Listen for a rowSelected event and pass to our handler method here -->
-    <DayList
-      v-bind:nrPeople="bookingNrOfPeople"
-      v-bind:displayDate="dateToDisplay"
-      v-bind:timeSlots="timesArray"
-      v-on:row-selected="onRowSelected"
-    />
+    <!-- START: DayTimeBooker Component -->
+    <div id="DTBContainer">
 
-    <!-- Display a message with a * saying all times are Office Meeting Times. -->
-    <p id="officeMeetingTimes">
-      <span style="color:red">*</span> All times are meeting at the
-      <a href="#">FlyZermatt office</a>. If you would
-      like to meet on the mountain, you can let us know a bit later
-      in this Booking process.
-    </p>
+      <!-- This is our custom component to mimic an EasyJet style of booking -->
+      <!-- Flight Nr/Slots for a given day. -->
+      <!-- v-bind:timeSlots Pass in an array of times to use when rendering each row. -->
+      <!-- v-on: Listen for a rowSelected event and pass to our handler method here -->
+      <DayList
+        v-bind:nrPeople="bookingNrOfPeople"
+        v-bind:displayDate="dateToDisplay"
+        v-bind:timeSlots="timesArray"
+        v-on:row-selected="onRowSelected"
+      />
 
-    <!-- Give a bunch of data from when the user selects a TimeSlot -->
-    <div class="q-pa-xs shadow-4" style="background-color:lightgray; border-color:black;" bordered>
-      <div class="q-pa-xs" style="color:maroon; font-weight:bold;">
-        Info:
-      </div>
-
-      <div class="q-py-xs q-px-xs">Selected Slot: {{clickedId}}</div>
-      <div class="q-py-xs q-px-xs">Selected Time: {{clickedTime}}</div>
-      <div class="q-py-xs q-px-xs">Selected Availability in Slot: {{clickedAvail}}</div>
-      <hr />
-      <!-- How many people in this Booking? -->
-      <div class="q-py-xs q-px-xs">
-        User Group of: <strong>{{bookingNrOfPeople}}</strong>:&nbsp;
-          <q-btn-dropdown color="primary" label="Nr of People" size="sm" id="peopleDropMenu">
-            <q-list>
-              <q-item
-                clickable
-                v-close-popup
-                highlight
-                v-for="n in maxPeoplePerBooking"
-                :key="`x.${n}`"
-                v:bind="bookingNrOfPeople"
-                @click="onNrPplClick"
-              >
-                <q-item-section>
-                  <q-item-label>{{n}}</q-item-label>
-                </q-item-section>
-              </q-item>
-              <q-item
-                :key="`x.${maxPeoplePerBooking + 1}`"
-                clickable v-close-popup
-                highlight
-                @click="onTooManyPeople"
-              >
-                <q-item-section>
-                  <q-item-label>{{maxPeoplePerBooking+1}}+ people</q-item-label>
-                </q-item-section>
-              </q-item>
-            </q-list>
-          </q-btn-dropdown>
-      </div>
-
-      <div class="q-py-xs q-px-xs">User selected Date: <strong>{{getUserDateStr}}</strong>
-        <span style="width:3px;">&nbsp;</span>
-        <q-btn
-          color="blue"
-          size="8px"
-          icon="today"
-          style="position:relative; top:-2px;"
-          v-on:click="toggleCalendarPopup"
-        >
-          <q-popup-proxy @before-show="calUpdateProxy" transition-show="scale" transition-hide="scale">
-            <q-date v-model="dateToDisplay">
-              <div class="row items-center justify-end q-gutter-sm">
-                <q-btn label="Cancel" color="primary" flat v-close-popup />
-                <q-btn label="OK" color="primary" flat @click="calSave" v-close-popup />
-              </div>
-            </q-date>
-          </q-popup-proxy>
-        </q-btn>
-      </div>
     </div>
+    <!-- END : DayTimeBooker Component -->
 
-    <!-- Popup dialog from Vuesax saying for more than MAX group size, do 2x separate bookings -->
-    <!-- or contact us directly (message in notes field, call, etc.) -->
-    <vs-dialog id="bigGroupDialog"
-      blur
-      width="450px"
-      not-center
-      v-model="exceededMaxNrPeopleDialogActive"
-    >
-      <template #header>
-        <div class="centerIcon q-my-md">
-          <q-icon class="icon" size="60px" name="info" color="primary" style=""/>
+      <!-- Display a message with a * saying all times are Office Meeting Times. -->
+      <p id="officeMeetingTimes">
+        <span style="color:red">*</span> All times are meeting at the
+        <a href="#">FlyZermatt office</a>. If you would
+        like to meet on the mountain, you can let us know a bit later
+        in this Booking process.
+      </p>
+
+      <!-- Give a bunch of data from when the user selects a TimeSlot -->
+      <div class="q-pa-xs shadow-4" style="background-color:lightgray; border-color:black;" bordered>
+        <div class="q-pa-xs" style="color:maroon; font-weight:bold;">
+          Info:
         </div>
-        <h4 class="center q-mb-md q-mt-md" style="">
-          Booking a <strong>Big</strong> Group
-        </h4>
-      </template>
 
-      <div class="con-content">
-        <p>If your group contains {{maxPeoplePerBooking+1}} or more people...</p>
-        <p>
-          ...you can either do 2 or more separate bookings, splitting your group
-          up amongst available times, or send us a Booking message (later in this
-          booking process) or just give us a ring: Tel +41 79 123 3456
-        </p>
-      </div>
+        <div class="q-py-xs q-px-xs">Selected Slot: {{clickedId}}</div>
+        <div class="q-py-xs q-px-xs">Selected Time: {{clickedTime}}</div>
+        <div class="q-py-xs q-px-xs">Selected Availability in Slot: {{clickedAvail}}</div>
+        <hr />
+        <!-- How many people in this Booking? -->
+        <div class="q-py-xs q-px-xs">
+          User Group of: <strong>{{bookingNrOfPeople}}</strong>:&nbsp;
+            <q-btn-dropdown color="primary" label="Nr of People" size="sm" id="peopleDropMenu">
+              <q-list>
+                <q-item
+                  clickable
+                  v-close-popup
+                  highlight
+                  v-for="n in maxPeoplePerBooking"
+                  :key="`x.${n}`"
+                  v:bind="bookingNrOfPeople"
+                  @click="onNrPplClick"
+                >
+                  <q-item-section>
+                    <q-item-label>{{n}}</q-item-label>
+                  </q-item-section>
+                </q-item>
+                <q-item
+                  :key="`x.${maxPeoplePerBooking + 1}`"
+                  clickable v-close-popup
+                  highlight
+                  @click="onTooManyPeople"
+                >
+                  <q-item-section>
+                    <q-item-label>{{maxPeoplePerBooking+1}}+ people</q-item-label>
+                  </q-item-section>
+                </q-item>
+              </q-list>
+            </q-btn-dropdown>
+        </div>
 
-      <template #footer>
-        <div class="con-footer" style="text-align:center;">
-          <q-btn id="btnClosePeopleDialog"
-            class=""
-            rounded
-            color="primary"
-            @click="exceededMaxNrPeopleDialogActive=false"
+        <div class="q-py-xs q-px-xs">User selected Date: <strong>{{getUserDateStr}}</strong>
+          <span style="width:3px;">&nbsp;</span>
+          <q-btn
+            color="blue"
+            size="8px"
+            icon="today"
+            style="position:relative; top:-2px;"
+            v-on:click="toggleCalendarPopup"
           >
-            <strong class="q-px-lg">Ok</strong>
+            <q-popup-proxy @before-show="calUpdateProxy" transition-show="scale" transition-hide="scale">
+              <q-date v-model="dateToDisplay">
+                <div class="row items-center justify-end q-gutter-sm">
+                  <q-btn label="Cancel" color="primary" flat v-close-popup />
+                  <q-btn label="OK" color="primary" flat @click="calSave" v-close-popup />
+                </div>
+              </q-date>
+            </q-popup-proxy>
           </q-btn>
         </div>
-      </template>
-    </vs-dialog>
+      </div>
+
+      <!-- Popup dialog from Vuesax saying for more than MAX group size, do 2x separate bookings -->
+      <!-- or contact us directly (message in notes field, call, etc.) -->
+      <vs-dialog id="bigGroupDialog"
+        blur
+        width="450px"
+        not-center
+        v-model="exceededMaxNrPeopleDialogActive"
+      >
+        <template #header>
+          <div class="centerIcon q-my-md">
+            <q-icon class="icon" size="60px" name="info" color="primary" style=""/>
+          </div>
+          <h4 class="center q-mb-md q-mt-md" style="">
+            Booking a <strong>Big</strong> Group
+          </h4>
+        </template>
+
+        <div class="con-content">
+          <p>If your group contains {{maxPeoplePerBooking+1}} or more people...</p>
+          <p>
+            ...you can either do 2 or more separate bookings, splitting your group
+            up amongst available times, or send us a Booking message (later in this
+            booking process) or just give us a ring: Tel +41 79 123 3456
+          </p>
+        </div>
+
+        <template #footer>
+          <div class="con-footer" style="text-align:center;">
+            <q-btn id="btnClosePeopleDialog"
+              class=""
+              rounded
+              color="primary"
+              @click="exceededMaxNrPeopleDialogActive=false"
+            >
+              <strong class="q-px-lg">Ok</strong>
+            </q-btn>
+          </div>
+        </template>
+      </vs-dialog>
 
   </div>
 </template>
