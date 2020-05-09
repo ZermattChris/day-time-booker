@@ -28,14 +28,12 @@
         </div>
         <div class="col center" style="letter-spacing:0.005em;">
           <q-chip
-            outline
-            color="green-10"
-            text-color="black"
+            color="white"
             class="q-my-none ellipsis"
             size="0.9em"
           >
-            <q-icon class="icon" name="check_circle" color="green" size="1.3em" style="padding-right:0.5em;"/>
-            {{timeSlot.avail}} places available xxxxxx
+            <q-icon class="icon" name="check_circle" color="gray" size="1.3em" style="padding-right:0.5em;"/>
+            {{timeSlot.avail}} places available
           </q-chip>
         </div>
       </div>
@@ -113,7 +111,7 @@ export default {
 
 <style scoped>
 #DayList {
-  background: radial-gradient(circle, #bebebe 0%, #170d30 100%);
+  background: radial-gradient(circle, #bebebe 0%, #757575 100%);
   min-width: 200px;
 }
 /* HeadBox - where the big date info is shown */

@@ -19,10 +19,10 @@
     </div>
 
       <!-- Extra div to try and center on page -->
-      <div style="background-color:yellow; padding:20px;">
+      <div style="background-color:silver; padding:20px 50px;">
 
         <!-- START: DayTimeBooker Component -->
-        <div id="DTBContainer" :style="cssProps" style="margin: 0 auto;" >
+        <div id="DTBContainer" :style="cssProps" style="margin:0 auto;" >
 
           <!-- This is our custom component to mimic an EasyJet style of booking -->
           <!-- Flight Nr/Slots for a given day. -->
@@ -34,6 +34,18 @@
             v-bind:timeSlots="timesArray"
             v-on:row-selected="onRowSelected"
           />
+          <!-- <DayList
+            v-bind:nrPeople="bookingNrOfPeople"
+            v-bind:displayDate="dateToDisplay"
+            v-bind:timeSlots="timesArray"
+            v-on:row-selected="onRowSelected"
+          />
+          <DayList
+            v-bind:nrPeople="bookingNrOfPeople"
+            v-bind:displayDate="dateToDisplay"
+            v-bind:timeSlots="timesArray"
+            v-on:row-selected="onRowSelected"
+          /> -->
 
         </div>
         <!-- END : DayTimeBooker Component -->
@@ -251,12 +263,18 @@ export default {
 </script>
 
 <style>
-  /* Set the Base font scaling size for the component here */
+  /* -------------------------------------------------------------
+    Set the Base font scaling size for the component here
+    Its possible to control pretty exactly the sizing and box
+    placement in the parent container, just by tweaking the below
+  ---------------------------------------------------------------- */
   #DTBContainer {
     font-size: var(--scale-font-size);
-    width: var(--scale-box-width);
-    /* font-size: 18px; 18px is a reasonable font-size default */
-    /* width: 380px; 380px is a reasonable width default */
+    width: 25em;
+    /* 18px is a reasonable font-size default */
+    /* font-size: 18px; */
+    /* 380px is a reasonable width default. Remove and the DTBooker will fill the parent's box. */
+    /* width: 380px; */
   }
   .disable-text-selection {
     -moz-user-select: none; /* Firefox */
