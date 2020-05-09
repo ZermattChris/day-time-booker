@@ -214,7 +214,7 @@ export default {
     },
     cssProps () {
       return {
-        '--scale-font-size': (this.scaleValue * 0.1) + 0.7 + 'em',
+        '--scale-font-size': ((this.scaleValue - 2) * 0.15) + 0.7 + 'em',
         '--scale-box-width': (this.scaleValue * 30) + 250 + 'px'
       }
     }
@@ -226,6 +226,9 @@ export default {
       this.clickedTime = eTime
       this.clickedAvail = eAvail
     },
+
+    // Testing harness junk below here...
+
     toggleCalendarPopup: function () {
       // as cal data is bound, we don't need to handle anything here! Cool.
       // console.log('cal click')
