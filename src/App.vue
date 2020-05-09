@@ -2,7 +2,7 @@
   <div id="q-app" class="q-pa-md">
 
     <div class="q-pa-md">   <!-- A Scale slider to test the font-scaling -->
-      <q-badge color="primary" class="q-pa-md" outline>
+      <q-badge color="teal" class="q-pa-md" outline>
         Scale: <strong>{{ scaleValue }}</strong>
       </q-badge>
 
@@ -14,12 +14,12 @@
         snap
         markers
         label
-        color="purple"
+        color="teal"
       />
     </div>
 
       <!-- Extra div to try and center on page -->
-      <div style="background-color:silver; padding:20px 50px;">
+      <div style="background-color:silver; padding:20px 5px;">
 
         <!-- START: DayTimeBooker Component -->
         <div id="DTBContainer" :style="cssProps" style="margin:0 auto;" >
@@ -254,7 +254,6 @@ export default {
     calUpdateProxy () {
       this.proxyDate = this.date
     },
-
     calSave () {
       this.date = this.proxyDate
     }

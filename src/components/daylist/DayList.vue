@@ -18,7 +18,7 @@
       :id = "timeSlot.id"
       v-for = "timeSlot in timeSlots"
       v-bind:key = "timeSlot.id"
-      v-on:row-click = "rowClick(timeSlot)"
+      v-on:row-click = "onRowClick(timeSlot)"
     >
       <!-- Pass row content into DayListItem's 'slot' -->
       <div class="row disable-text-selection">
@@ -72,7 +72,7 @@ export default {
   methods: {
     // Called when user clicks on the DayListItem sub component.
     // 'timeSlot' contains the clicked Row's data from the TimeSlots array.
-    rowClick: function (timeSlot) {
+    onRowClick: function (timeSlot) {
       // console.log('Clicked on TimeSlot id: ' + timeSlot.id + '. Time: ' + timeSlot.time + '. Availability: ' + timeSlot.avail)
       this.$emit('row-selected', timeSlot.id, timeSlot.time, timeSlot.avail)
     },
@@ -137,7 +137,7 @@ export default {
   padding-right: 0.4em;
   padding-bottom: 0.2em;
 
-  border-bottom: 2px rgb(255, 255, 255) solid !important;
+  border-bottom: 2px rgb(255, 255, 255) solid;
 }
   .item:last-child {
     border-bottom-width: 0px !important;
