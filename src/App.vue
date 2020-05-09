@@ -179,7 +179,7 @@ export default {
       clickedId: 0,
       clickedTime: '-',
       clickedAvail: 0,
-      scaleValue: 5,
+      scaleValue: 5, /* 5 is the default size. Allows +/-5 scaling in both directions */
       dateToDisplay: Date.now(), // default to current date/time
       dateToDisplayCalVisible: false,
       exceededMaxNrPeopleDialogActive: false,
@@ -255,6 +255,8 @@ export default {
   #DTBContainer {
     font-size: var(--scale-font-size);
     width: var(--scale-box-width);
+    /* font-size: 18px; 18px is a reasonable font-size default */
+    /* width: 380px; 380px is a reasonable width default */
   }
   .disable-text-selection {
     -moz-user-select: none; /* Firefox */

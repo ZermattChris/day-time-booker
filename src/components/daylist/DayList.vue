@@ -26,19 +26,16 @@
             <span style="color:maroon">*</span>
             {{getHours(timeSlot.time)}}<span class="minutes">:{{getMins(timeSlot.time)}}</span>
         </div>
-        <!-- <div class="center col-1 col-md-auto">
-          <q-icon class="icon q-px-md" name="check_circle" color="green" />
-        </div> -->
-        <div class="col center">
+        <div class="col center" style="letter-spacing:0.005em;">
           <q-chip
             outline
             color="green-10"
             text-color="black"
             class="q-my-none ellipsis"
-            size="lg"
+            size="0.9em"
           >
-            <q-icon class="icon q-px-md" name="check_circle" color="green" />
-            {{timeSlot.avail}} places available
+            <q-icon class="icon" name="check_circle" color="green" size="1.3em" style="padding-right:0.5em;"/>
+            {{timeSlot.avail}} places available xxxxxx
           </q-chip>
         </div>
       </div>
