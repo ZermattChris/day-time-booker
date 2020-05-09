@@ -13,31 +13,35 @@
       <div id="dlh-text-subtitle1" style="font-weight:bold;">{{getDisplaySubtitleDateStr}}</div>
     </q-card-section>
 
-    <DayListItem
-      class="item"
-      :id = "timeSlot.id"
-      v-for = "timeSlot in timeSlots"
-      v-bind:key = "timeSlot.id"
-      v-on:row-click = "onRowClick(timeSlot)"
-    >
-      <!-- Pass row content into DayListItem's 'slot' -->
-      <div class="row disable-text-selection">
-        <div class="col-3 center time">
-            <span style="color:maroon">*</span>
-            {{getHours(timeSlot.time)}}<span class="minutes">:{{getMins(timeSlot.time)}}</span>
+    <div>
+
+      <DayListItem
+        class="item"
+        :id = "timeSlot.id"
+        v-for = "timeSlot in timeSlots"
+        v-bind:key = "timeSlot.id"
+        v-on:row-click = "onRowClick(timeSlot)"
+      >
+        <!-- Pass row content into DayListItem's 'slot' -->
+        <div class="row disable-text-selection">
+          <div class="col-3 center time">
+              <span style="color:maroon">*</span>
+              {{getHours(timeSlot.time)}}<span class="minutes">:{{getMins(timeSlot.time)}}</span>
+          </div>
+          <div class="col center" style="letter-spacing:0.005em;">
+            <q-chip
+              color="white"
+              class="q-my-none ellipsis"
+              size="0.9em"
+            >
+              <q-icon class="icon" name="check_circle" color="gray" size="1.3em" style="padding-right:0.5em;"/>
+              {{timeSlot.avail}} places available
+            </q-chip>
+          </div>
         </div>
-        <div class="col center" style="letter-spacing:0.005em;">
-          <q-chip
-            color="white"
-            class="q-my-none ellipsis"
-            size="0.9em"
-          >
-            <q-icon class="icon" name="check_circle" color="gray" size="1.3em" style="padding-right:0.5em;"/>
-            {{timeSlot.avail}} places available
-          </q-chip>
-        </div>
-      </div>
-    </DayListItem>
+      </DayListItem>
+
+    </div>
 
     <p id="availabilityTimeMsg">&nbsp;</p>
 
@@ -132,15 +136,19 @@ export default {
   background: rgb(240, 240, 240);
   font-size: 1.3em;
 
-  padding-top: 0.4em;
+  border-radius: 0;
+
+  padding-top: 0.2em;
   padding-left: 0.4em;
   padding-right: 0.4em;
   padding-bottom: 0.2em;
 
-  border-bottom: 2px rgb(255, 255, 255) solid;
+  border-bottom: 0.1em rgb(255, 255, 255) solid;
 }
-  .item:last-child {
-    border-bottom-width: 0px !important;
+
+  div.item:last-child {
+    border-bottom-width: 0px;
+    padding-bottom: 0.3em;
   }
 .time {
     font-size: 1.2em;
