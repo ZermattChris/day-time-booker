@@ -7,10 +7,10 @@
     bordered
   >
     <q-card-section id="DLHead"
-      class="q-pa-sm center text-shadow-2"
+      class="center text-shadow-2"
     >
-      <div class="text-h4" style="font-weight:bold;">{{getDisplayDay}}</div>
-      <div class="text-subtitle1" style="font-weight:bold;">{{getDisplaySubtitleDateStr}}</div>
+      <div id="dlh-text-h4" style="font-weight:bold;">{{getDisplayDay}}</div>
+      <div id="dlh-text-subtitle1" style="font-weight:bold;">{{getDisplaySubtitleDateStr}}</div>
     </q-card-section>
 
     <DayListItem
@@ -119,16 +119,28 @@ export default {
   background: radial-gradient(circle, #bebebe 0%, #170d30 100%);
   min-width: 260px;
 }
+/* HeadBox - where the big date info is shown */
+#DLHead {
+  padding: 0.3em 1em;
+}
+  #dlh-text-h4 {
+    font-size: 1.8em;
+    padding: 0em;
+  }
+  #dlh-text-subtitle1 {
+    font-size: 0.9em;
+    padding: 0em ;
+  }
 
 /* This is each specific row box */
 .item {
   background: rgb(240, 240, 240);
   font-size: 1.3em;
 
-  padding-top: 12px;
-  padding-left: 10px;
-  padding-right: 10px;
-  padding-bottom: 9px;
+  padding-top: 0.4em;
+  padding-left: 0.4em;
+  padding-right: 0.4em;
+  padding-bottom: 0.2em;
 
   border-bottom: 2px rgb(255, 255, 255) solid !important;
 }
@@ -140,9 +152,9 @@ export default {
   }
 .minutes {
   position: relative;
-  top: -2px;
-  left: 1px;
-  font-size: 0.80em !important;
+  top: -0.6em;
+  left: 0.1em;
+  font-size: 0.50em !important;
   color: rgb(46, 46, 46);
 }
 /* .description {
@@ -150,11 +162,8 @@ export default {
   text-overflow: clip;
 } */
 /* .icon {
-  margin-right: 10px;
-  font-size: 1.4em;
 } */
 /* .description {
-  margin-left: 6px;
 } */
 .center {
   text-align: center;
@@ -165,8 +174,8 @@ export default {
 
 p#availabilityTimeMsg {
   text-align: center;
-  font-size: 0.85em;
-  margin: 2px 0 0 0;
+  font-size: 0.45em;
+  margin: 0.2em 0 0 0;
   color: rgb(175, 175, 175);
 }
 

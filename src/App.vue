@@ -1,8 +1,25 @@
 <template>
   <div id="q-app" class="q-pa-md">
 
+    <div class="q-pa-md">   <!-- A Scale slider to test the font-scaling -->
+      <q-badge color="primary" class="q-pa-md" outline>
+        Scale: <strong>{{ scaleValue }}</strong>
+      </q-badge>
+
+      <q-slider
+        v-model="scaleValue"
+        :min="0"
+        :max="10"
+        :step="1"
+        snap
+        label
+        label-always
+        color="purple"
+      />
+    </div>
+
     <!-- START: DayTimeBooker Component -->
-    <div id="DTBContainer">
+    <div id="DTBContainer" :style="cssProps">
 
       <!-- This is our custom component to mimic an EasyJet style of booking -->
       <!-- Flight Nr/Slots for a given day. -->
@@ -21,9 +38,7 @@
       <!-- Display a message with a * saying all times are Office Meeting Times. -->
       <p id="officeMeetingTimes">
         <span style="color:red">*</span> All times are meeting at the
-        <a href="#">FlyZermatt office</a>. If you would
-        like to meet on the mountain, you can let us know a bit later
-        in this Booking process.
+        <a href="#">FlyZermatt office</a>.
       </p>
 
       <!-- Give a bunch of data from when the user selects a TimeSlot -->
@@ -35,7 +50,9 @@
         <div class="q-py-xs q-px-xs">Selected Slot: {{clickedId}}</div>
         <div class="q-py-xs q-px-xs">Selected Time: {{clickedTime}}</div>
         <div class="q-py-xs q-px-xs">Selected Availability in Slot: {{clickedAvail}}</div>
+
         <hr />
+
         <!-- How many people in this Booking? -->
         <div class="q-py-xs q-px-xs">
           User Group of: <strong>{{bookingNrOfPeople}}</strong>:&nbsp;
@@ -157,6 +174,7 @@ export default {
       clickedId: 0,
       clickedTime: '-',
       clickedAvail: 0,
+      scaleValue: 5,
       dateToDisplay: Date.now(), // default to current date/time
       dateToDisplayCalVisible: false,
       exceededMaxNrPeopleDialogActive: false,
@@ -176,6 +194,11 @@ export default {
     // a computed getter
     getUserDateStr: function () {
       return '' + qDate.formatDate(this.dateToDisplay, 'dddd, MMMM D, YYYY')
+    },
+    cssProps () {
+      return {
+        '--scale-font-size': (this.scaleValue * 0.1) + 0.7 + 'em'
+      }
     }
   },
   methods: {
@@ -224,9 +247,8 @@ export default {
 <style>
   /* Set the Base font scaling size for the component here */
   #DTBContainer {
-    font-size: 20px;
+    font-size: var(--scale-font-size);
   }
-
   .disable-text-selection {
     -moz-user-select: none; /* Firefox */
     -ms-user-select: none; /* Internet Explorer */
