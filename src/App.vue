@@ -8,32 +8,37 @@
 
       <q-slider
         v-model="scaleValue"
-        :min="0"
+        :min="1"
         :max="10"
         :step="1"
         snap
+        markers
         label
-        label-always
         color="purple"
       />
     </div>
 
-    <!-- START: DayTimeBooker Component -->
-    <div id="DTBContainer" :style="cssProps">
+      <!-- Extra div to try and center on page -->
+      <div style="background-color:yellow; padding:20px;">
 
-      <!-- This is our custom component to mimic an EasyJet style of booking -->
-      <!-- Flight Nr/Slots for a given day. -->
-      <!-- v-bind:timeSlots Pass in an array of times to use when rendering each row. -->
-      <!-- v-on: Listen for a rowSelected event and pass to our handler method here -->
-      <DayList
-        v-bind:nrPeople="bookingNrOfPeople"
-        v-bind:displayDate="dateToDisplay"
-        v-bind:timeSlots="timesArray"
-        v-on:row-selected="onRowSelected"
-      />
+        <!-- START: DayTimeBooker Component -->
+        <div id="DTBContainer" :style="cssProps" style="margin: 0 auto;" >
 
-    </div>
-    <!-- END : DayTimeBooker Component -->
+          <!-- This is our custom component to mimic an EasyJet style of booking -->
+          <!-- Flight Nr/Slots for a given day. -->
+          <!-- v-bind:timeSlots Pass in an array of times to use when rendering each row. -->
+          <!-- v-on: Listen for a rowSelected event and pass to our handler method here -->
+          <DayList
+            v-bind:nrPeople="bookingNrOfPeople"
+            v-bind:displayDate="dateToDisplay"
+            v-bind:timeSlots="timesArray"
+            v-on:row-selected="onRowSelected"
+          />
+
+        </div>
+        <!-- END : DayTimeBooker Component -->
+
+      </div>
 
       <!-- Display a message with a * saying all times are Office Meeting Times. -->
       <p id="officeMeetingTimes">
@@ -115,7 +120,7 @@
         v-model="exceededMaxNrPeopleDialogActive"
       >
         <template #header>
-          <div class="centerIcon q-my-md">
+          <div class="center q-my-md">
             <q-icon class="icon" size="60px" name="info" color="primary" style=""/>
           </div>
           <h4 class="center q-mb-md q-mt-md" style="">
@@ -197,7 +202,8 @@ export default {
     },
     cssProps () {
       return {
-        '--scale-font-size': (this.scaleValue * 0.1) + 0.7 + 'em'
+        '--scale-font-size': (this.scaleValue * 0.1) + 0.7 + 'em',
+        '--scale-box-width': (this.scaleValue * 30) + 250 + 'px'
       }
     }
   },
@@ -248,6 +254,7 @@ export default {
   /* Set the Base font scaling size for the component here */
   #DTBContainer {
     font-size: var(--scale-font-size);
+    width: var(--scale-box-width);
   }
   .disable-text-selection {
     -moz-user-select: none; /* Firefox */
@@ -259,7 +266,5 @@ export default {
   #officeMeetingTimes {
     margin: 20px;
   }
-  .centerIcon {
-    text-align: center;
-  }
+
 </style>

@@ -117,7 +117,7 @@ export default {
 <style scoped>
 #DayList {
   background: radial-gradient(circle, #bebebe 0%, #170d30 100%);
-  min-width: 260px;
+  min-width: 200px;
 }
 /* HeadBox - where the big date info is shown */
 #DLHead {
