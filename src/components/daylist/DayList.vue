@@ -19,7 +19,9 @@
       v-for = "timeSlot in timeSlots"
       v-bind:key = "timeSlot.id"
       v-on:row-click = "onRowClick(timeSlot, $event)"
-      :disable-row = "disableRow(timeSlot.avail)"
+      :disable-row = "initializeRow(timeSlot.avail)"
+      ref="items"
+      :avail="timeSlot.avail"
     >
       <template v-slot:time>
         <span style="color:maroon">*</span>
@@ -84,13 +86,22 @@ export default {
       }
       return items[1]
     },
-    disableRow: function (rowAvailibility) {
+    initializeRow: function (rowAvailibility) {
       // calculate if there are enough spaces available in this row, and
       // if not, then disable the row for user selection, by passing in a
       // prop ':disable-row' and adding/removing a disabled attribute to the row item.
       // console.log(rowAvailibility, this.bookingNrPeople)
       if (rowAvailibility >= this.bookingNrPeople) return false
       return true
+    },
+    changedGroupSize: function (updatedNrPeople) {
+      // loop through all of the child DayListItems and update.
+      // Need this if the number of people booking gets changed
+      // console.log('--- redrawing DayListItems ---')
+      // console.log(this.$refs.items.length)
+      for (const item of this.$refs.items) {
+        item.reset(updatedNrPeople)
+      }
     }
   },
   computed: {

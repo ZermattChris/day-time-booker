@@ -32,6 +32,7 @@
           <!-- v-bind:timeSlots Pass in an array of times to use when rendering each row. -->
           <!-- v-on: Listen for a rowSelected event and pass to our handler method here -->
           <DayList
+            ref="dayList1"
             v-bind:nrPeople="bookingNrOfPeople"
             v-bind:displayDate="dateToDisplay"
             v-bind:timeSlots="timesArray"
@@ -212,6 +213,9 @@ export default {
     }
   },
   methods: {
+    // This is where the final 'Page' container would check
+    // if there was a selected/valid item and enable/disable
+    // the Prev - Continue buttons...
     onRowSelected (eId, eTime, eAvail, eRowEl) {
       // console.log('User clicked on TimeSlot: ' + eTime + ', ' + eAvail)
       this.clickedId = eId
@@ -219,10 +223,7 @@ export default {
       this.clickedAvail = eAvail
       this.clickedRowObj = eRowEl
       // console.log(eRowEl)
-      this.toggleRow()
-    },
-    toggleRow () {
-      //
+      // this.toggleRow()
     },
 
     // Testing harness junk below here...
@@ -241,16 +242,21 @@ export default {
     },
     onNrPplClick (e) {
       this.bookingNrOfPeople = parseInt(e.target.textContent, 10) // Uses the string label to set nr of people.
+      // Update the DayList show correct enabled/disabled rows.
+      // console.log('Nr People: ' + this.bookingNrOfPeople)
+      this.$refs.dayList1.changedGroupSize(this.bookingNrOfPeople)
     },
     onTooManyPeople (e) {
       this.bookingNrOfPeople = this.maxPeoplePerBooking
       this.exceededMaxNrPeopleDialogActive = !this.exceededMaxNrPeopleDialogActive
-      console.log(e)
+      // trigger the resetting of List items.
+      this.$refs.dayList1.changedGroupSize(this.bookingNrOfPeople)
+      // console.log(e)
       // document.getElementById('btnClosePeopleDialog').focus() // not working. Grrr... Focus stays on pesky dropmenu, so hitting ENTER doesn't close dialog.
       e.preventDefault()
     },
     closeGroupDialog (e) {
-      console.log('catching close dialog ev')
+      // console.log('catching close dialog ev')
     },
     calUpdateProxy () {
       this.proxyDate = this.date

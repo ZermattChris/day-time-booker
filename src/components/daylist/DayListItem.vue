@@ -25,17 +25,32 @@ export default {
   name: 'DayListItem',
   data () {
     return {
+      nrAvailable: this.avail,
       disabledRow: this.disableRow,
       selected: false
     }
   },
   props: [
-    'disableRow'
+    'disableRow',
+    'avail'
   ],
   methods: {
     onClickedRow: function (e) {
       // console.log(!this.disabledRow)
-      if (!this.disabledRow) this.$emit('row-click', this) // only fire event if this item is enabled!
+      if (!this.disabledRow) {
+        this.selected = true
+        this.$emit('row-click', this) // only fire event if this item is enabled!
+      }
+    },
+    reset: function (nrPeople) {
+      // console.log('Nr: ' + nrPeople + ' -> Items Avail: ' + this.nrAvailable)
+      if (nrPeople > this.nrAvailable) {
+        this.selected = true
+        this.disabledRow = true
+      } else {
+        this.selected = false
+        this.disabledRow = false
+      }
     }
   }
 }
