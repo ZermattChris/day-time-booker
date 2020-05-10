@@ -1,12 +1,23 @@
 <template>
   <q-card
-     @click="onClickedRow"
+    @click="onClickedRow"
+    v-bind:class="[{ 'disabled': disabled }]"
   >
-    <slot></slot>
+    <div class="itemRow row disable-text-selection">
+      <div class="itemTime col-3 center">
+        <slot name="time"></slot>
+      </div>
+      <div class="col center" style="letter-spacing:0.005em;">
+        <q-chip
+          class="itemMessage q-my-none ellipsis"
+          color="white"
+          size="0.9em"
+        >
+          <slot name="message"></slot>
+        </q-chip>
+      </div>
+    </div>
   </q-card>
-
-  <!-- <button @click="listeners['custom-event']('message from child')">      @click="$emit('row-click', arguments)" -->
-
 </template>
 
 <script>
@@ -14,12 +25,16 @@ export default {
   name: 'DayListItem',
   data () {
     return {
-      // activeTooltip1: false
+      disabled: true,
+      selected: false
     }
   },
+  props: [
+    'enabled'
+  ],
   methods: {
     onClickedRow: function (e) {
-      this.$emit('row-click', this)
+      if (!this.disabled) this.$emit('row-click', this) // only fire event if this item is enabled!
     }
   }
 }

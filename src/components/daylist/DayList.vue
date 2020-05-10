@@ -13,35 +13,23 @@
       <div id="dlh-text-subtitle1" style="font-weight:bold;">{{getDisplaySubtitleDateStr}}</div>
     </q-card-section>
 
-    <div>
-
-      <DayListItem
-        class="item"
-        :id = "timeSlot.id"
-        v-for = "timeSlot in timeSlots"
-        v-bind:key = "timeSlot.id"
+    <DayListItem
+      class="item"
+      :id = "timeSlot.id"
+      v-for = "timeSlot in timeSlots"
+      v-bind:key = "timeSlot.id"
       v-on:row-click = "onRowClick(timeSlot, $event)"
-      >
-        <!-- Pass row content into DayListItem's 'slot' -->
-        <div class="row disable-text-selection">
-          <div class="col-3 center time">
-              <span style="color:maroon">*</span>
-              {{getHours(timeSlot.time)}}<span class="minutes">:{{getMins(timeSlot.time)}}</span>
-          </div>
-          <div class="col center" style="letter-spacing:0.005em;">
-            <q-chip
-              color="white"
-              class="q-my-none ellipsis"
-              size="0.9em"
-            >
-              <q-icon class="icon" name="check_circle" color="gray" size="1.3em" style="padding-right:0.5em;"/>
-              {{timeSlot.avail}} places available
-            </q-chip>
-          </div>
-        </div>
-      </DayListItem>
+    >
+      <template v-slot:time>
+        <span style="color:maroon">*</span>
+        {{getHours(timeSlot.time)}}<span class="itemMinutes">:{{getMins(timeSlot.time)}}</span>
+      </template>
+      <template v-slot:message>
+        <q-icon class="icon" name="check_circle" color="gray" size="1.3em" style="padding-right:0.5em;"/>
+        {{timeSlot.avail}} places available
+      </template>
 
-    </div>
+    </DayListItem>
 
     <p id="availabilityTimeMsg">&nbsp;</p>
 
@@ -53,9 +41,6 @@
 import DayListItem from 'components/daylist/DayListItem'
 import { date } from 'quasar'
 const qDate = date
-
-// import date from 'quasar'
-// const { addToDate } = date
 
 export default {
   name: 'DayList',
@@ -69,8 +54,7 @@ export default {
   ],
   data () {
     return {
-      displayDayStr: '',
-      selectedRow: null
+      displayDayStr: ''
     }
   },
   methods: {
@@ -78,8 +62,9 @@ export default {
     // 'timeSlot' contains the clicked Row's data from the TimeSlots array.
     // el holds the Dom object that was clicked on (DayListItem)
     onRowClick: function (timeSlot, el) {
-      // console.log('Clicked on TimeSlot id: ' + timeSlot.id + '. Time: ' + timeSlot.time + '. Availability: ' + timeSlot.avail + ' Event: ' + el)
-      this.$emit('row-selected', timeSlot.id, timeSlot.time, timeSlot.avail)
+      // console.log(el)
+      console.log('Clicked on TimeSlot id: ' + timeSlot.id + '. Time: ' + timeSlot.time + '. Availability: ' + timeSlot.avail + ' Event: ' + el)
+      this.$emit('row-selected', timeSlot.id, timeSlot.time, timeSlot.avail, el)
     },
     getHours: function (timeStr) {
       // split timeStr on the colon ':' or throw error.
@@ -117,7 +102,7 @@ export default {
 <style scoped>
 #DayList {
   background: radial-gradient(circle, #bebebe 0%, #757575 100%);
-  min-width: 200px;
+  /* min-width: 200px; */
 }
 /* HeadBox - where the big date info is shown */
 #DLHead {
@@ -151,24 +136,16 @@ export default {
     border-bottom-width: 0px;
     padding-bottom: 0.3em;
   }
-.time {
+.itemTime {
     font-size: 1.2em;
   }
-.minutes {
+.itemMinutes {
   position: relative;
   top: -0.6em;
   left: 0.1em;
   font-size: 0.50em !important;
   color: rgb(46, 46, 46);
 }
-/* .description {
-  color: maroon;
-  text-overflow: clip;
-} */
-/* .icon {
-} */
-/* .description {
-} */
 .center {
   text-align: center;
 }

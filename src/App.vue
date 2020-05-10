@@ -1,6 +1,8 @@
 <template>
   <div id="q-app" class="q-pa-md">
 
+    <div class="text-h4 text-weight-bold q-ml-auto q-mr-auto" style="text-align:center; color:teal;">bSoftware's<br />DayTimeBooker Playpen</div>
+
     <div class="q-pa-md">   <!-- A Scale slider to test the font-scaling. xxxxx -->
       <q-badge color="teal" class="q-pa-md" outline>
         Scale: <strong>{{ scaleValue }}</strong>
@@ -24,6 +26,7 @@
         <!-- START: DayTimeBooker Component -->
         <div id="DTBContainer" :style="cssProps" style="margin:0 auto;" >
 
+          <!-- TODO: remove the nrPeople + displyDate props -- read from slotsArray -->
           <!-- This is our custom component to mimic an EasyJet style of booking -->
           <!-- Flight Nr/Slots for a given day. -->
           <!-- v-bind:timeSlots Pass in an array of times to use when rendering each row. -->
@@ -34,18 +37,6 @@
             v-bind:timeSlots="timesArray"
             v-on:row-selected="onRowSelected"
           />
-          <!-- <DayList
-            v-bind:nrPeople="bookingNrOfPeople"
-            v-bind:displayDate="dateToDisplay"
-            v-bind:timeSlots="timesArray"
-            v-on:row-selected="onRowSelected"
-          />
-          <DayList
-            v-bind:nrPeople="bookingNrOfPeople"
-            v-bind:displayDate="dateToDisplay"
-            v-bind:timeSlots="timesArray"
-            v-on:row-selected="onRowSelected"
-          /> -->
 
         </div>
         <!-- END : DayTimeBooker Component -->
@@ -191,6 +182,7 @@ export default {
       clickedId: 0,
       clickedTime: '-',
       clickedAvail: 0,
+      clickedRowObj: null,
       scaleValue: 5, /* 5 is the default size. Allows +/-5 scaling in both directions */
       dateToDisplay: Date.now(), // default to current date/time
       dateToDisplayCalVisible: false,
@@ -220,22 +212,18 @@ export default {
     }
   },
   methods: {
-    onRowSelected (eId, eTime, eAvail) {
+    onRowSelected (eId, eTime, eAvail, eRowEl) {
       // console.log('User clicked on TimeSlot: ' + eTime + ', ' + eAvail)
       this.clickedId = eId
       this.clickedTime = eTime
       this.clickedAvail = eAvail
-
-      // this.toggleRow()
+      this.clickedRowObj = eRowEl
+      // console.log(eRowEl)
+      this.toggleRow()
     },
-    // toggleRow (eId, eTime, eAvail) {
-    //   // console.log('User clicked on TimeSlot: ' + eTime + ', ' + eAvail)
-    //   this.clickedId = eId
-    //   this.clickedTime = eTime
-    //   this.clickedAvail = eAvail
-
-    //   this.toggleRow()
-    // },
+    toggleRow () {
+      //
+    },
 
     // Testing harness junk below here...
 
