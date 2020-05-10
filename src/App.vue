@@ -1,7 +1,7 @@
 <template>
   <div id="q-app" class="q-pa-md">
 
-    <div class="q-pa-md">   <!-- A Scale slider to test the font-scaling -->
+    <div class="q-pa-md">   <!-- A Scale slider to test the font-scaling. xxxxx -->
       <q-badge color="teal" class="q-pa-md" outline>
         Scale: <strong>{{ scaleValue }}</strong>
       </q-badge>
