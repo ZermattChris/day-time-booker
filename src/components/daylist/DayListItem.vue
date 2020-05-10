@@ -1,9 +1,11 @@
 <template>
   <q-card
-    v-on:click="$emit('row-click')"
+     @click="onClickedRow"
   >
     <slot></slot>
   </q-card>
+
+  <!-- <button @click="listeners['custom-event']('message from child')">      @click="$emit('row-click', arguments)" -->
 
 </template>
 
@@ -16,9 +18,8 @@ export default {
     }
   },
   methods: {
-    xxx: function (e) {
-      // console.log(e)
-      // this.$emit('rowClick', this)
+    onClickedRow: function (e) {
+      this.$emit('row-click', this)
     }
   }
 }

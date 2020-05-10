@@ -225,7 +225,17 @@ export default {
       this.clickedId = eId
       this.clickedTime = eTime
       this.clickedAvail = eAvail
+
+      // this.toggleRow()
     },
+    // toggleRow (eId, eTime, eAvail) {
+    //   // console.log('User clicked on TimeSlot: ' + eTime + ', ' + eAvail)
+    //   this.clickedId = eId
+    //   this.clickedTime = eTime
+    //   this.clickedAvail = eAvail
+
+    //   this.toggleRow()
+    // },
 
     // Testing harness junk below here...
 
