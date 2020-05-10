@@ -1,6 +1,6 @@
 {
   "name": "daytimebooker",
-  "version": "0.6",
+  "version": "0.7",
   "description": "Building a component to learn Vue.js and prep for FLYZermatt's online booking system",
   "productName": "bSoftware's DayTimeBooker",
   "cordovaId": "org.cordova.quasar.app",

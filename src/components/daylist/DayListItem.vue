@@ -1,7 +1,7 @@
 <template>
   <q-card
     @click="onClickedRow"
-    v-bind:class="[{ 'disabled': disabled }]"
+    v-bind:class="[{ 'disabled': disabledRow }]"
   >
     <div class="itemRow row disable-text-selection">
       <div class="itemTime col-3 center">
@@ -25,16 +25,17 @@ export default {
   name: 'DayListItem',
   data () {
     return {
-      disabled: true,
+      disabledRow: this.disableRow,
       selected: false
     }
   },
   props: [
-    'enabled'
+    'disableRow'
   ],
   methods: {
     onClickedRow: function (e) {
-      if (!this.disabled) this.$emit('row-click', this) // only fire event if this item is enabled!
+      // console.log(!this.disabledRow)
+      if (!this.disabledRow) this.$emit('row-click', this) // only fire event if this item is enabled!
     }
   }
 }

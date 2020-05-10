@@ -19,6 +19,7 @@
       v-for = "timeSlot in timeSlots"
       v-bind:key = "timeSlot.id"
       v-on:row-click = "onRowClick(timeSlot, $event)"
+      :disable-row = "disableRow(timeSlot.avail)"
     >
       <template v-slot:time>
         <span style="color:maroon">*</span>
@@ -54,7 +55,8 @@ export default {
   ],
   data () {
     return {
-      displayDayStr: ''
+      displayDayStr: '',
+      bookingNrPeople: this.nrPeople
     }
   },
   methods: {
@@ -63,7 +65,7 @@ export default {
     // el holds the Dom object that was clicked on (DayListItem)
     onRowClick: function (timeSlot, el) {
       // console.log(el)
-      console.log('Clicked on TimeSlot id: ' + timeSlot.id + '. Time: ' + timeSlot.time + '. Availability: ' + timeSlot.avail + ' Event: ' + el)
+      // console.log('Clicked on TimeSlot id: ' + timeSlot.id + '. Time: ' + timeSlot.time + '. Availability: ' + timeSlot.avail + ' Event: ' + el)
       this.$emit('row-selected', timeSlot.id, timeSlot.time, timeSlot.avail, el)
     },
     getHours: function (timeStr) {
@@ -81,6 +83,14 @@ export default {
         throw new Error('Time String data (timeSlots array) must be in the format of "10:45". Was passed:' + timeStr)
       }
       return items[1]
+    },
+    disableRow: function (rowAvailibility) {
+      // calculate if there are enough spaces available in this row, and
+      // if not, then disable the row for user selection, by passing in a
+      // prop ':disable-row' and adding/removing a disabled attribute to the row item.
+      // console.log(rowAvailibility, this.bookingNrPeople)
+      if (rowAvailibility >= this.bookingNrPeople) return false
+      return true
     }
   },
   computed: {
@@ -89,9 +99,6 @@ export default {
       return qDate.formatDate(this.displayDate, 'ddd')
     },
     getDisplaySubtitleDateStr: function () {
-      return '' + qDate.formatDate(this.displayDate, 'D MMMM, YYYY')
-    },
-    xxx: function () {
       return '' + qDate.formatDate(this.displayDate, 'D MMMM, YYYY')
     }
   }
