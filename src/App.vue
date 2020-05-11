@@ -198,7 +198,7 @@ export default {
       clickedAvail: 0,
       clickedRowObj: null,
       scaleValue: 5, // 5 is the default size. Allows +/-5 scaling in both directions
-      dateToDisplay: Date.now(),
+      dateToDisplay: qDate.formatDate(qDate.addToDate(Date.now(), { days: 2 }), 'YYYY/MM/DD'),
 
       exceededMaxNrPeopleDialogActive: false,
       continueBtnDisabled: true,
