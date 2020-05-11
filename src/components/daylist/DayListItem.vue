@@ -1,17 +1,17 @@
 <template>
-  <q-card
-    @click="onClickedRow"
-    v-bind:class="[{ 'disabled': disabledRow, 'hiliteRow': selected }]"
-  >
-    <div class="itemRow row disable-text-selection">
-      <div class="itemTime col-3 center">
-        <slot name="time"></slot>
+    <q-card
+      @click="onClickedRow"
+      v-bind:class="[{ 'disabled': disabledRow, 'hiliteRow': selected }]"
+    >
+      <div class="itemRow row disable-text-selection">
+        <div class="itemTime col-3 center">
+          <slot name="time"></slot>
+        </div>
+        <div class="col center" style="letter-spacing:0.005em;">
+          <slot name="message"></slot>
+        </div>
       </div>
-      <div class="col center" style="letter-spacing:0.005em;">
-        <slot name="message"></slot>
-      </div>
-    </div>
-  </q-card>
+    </q-card>
 </template>
 
 <script>
@@ -78,6 +78,11 @@ export default {
     cursor: pointer;
     background-color: rgb(239, 241, 255);
   }
+  /* .q-card.disabled,
+  .q-card.disabled > .q-chip {
+    opacity: 1 !important;
+    background-color: rgb(131, 131, 131) !important;
+  } */
   .hiliteRow {
     font-weight: bolder;
   }
