@@ -76,7 +76,7 @@ export default {
   }
   .q-card:hover {
     cursor: pointer;
-    background-color: rgb(234, 236, 250);
+    background-color: rgb(239, 241, 255);
   }
   .hiliteRow {
     font-weight: bolder;

@@ -7,6 +7,7 @@
         </q-badge> -->
 
         <q-slider
+          id="scaleSlider"
           v-model="scaleValue"
           :min="1"
           :max="10"
@@ -55,7 +56,7 @@
         <div class="col"></div>
         <div class="col-6">
           <q-btn id="backBtn" color="primary" label="Back" disable class="float-left"/>
-          <q-btn id="continueBtn" color="primary" label="Continue" disable class="float-right"/>
+          <q-btn id="continueBtn" v-bind:class="{'disabled': continueBtnDisabled}" color="primary" label="Continue" class="float-right"/>
         </div>
         <div class="col"></div>
       </div>
@@ -114,13 +115,12 @@
             size="8px"
             icon="today"
             style="position:relative; top:-2px;"
-            v-on:click="toggleCalendarPopup"
           >
             <q-popup-proxy @before-show="calUpdateProxy" transition-show="scale" transition-hide="scale">
-              <q-date v-model="dateToDisplay">
+              <q-date v-model="dateToDisplay" :options="optionsFn">
                 <div class="row items-center justify-end q-gutter-sm">
                   <q-btn label="Cancel" color="primary" flat v-close-popup />
-                  <q-btn label="OK" color="primary" flat @click="calSave" v-close-popup />
+                  <q-btn label="OK" color="primary" flat v-close-popup />
                 </div>
               </q-date>
             </q-popup-proxy>
@@ -197,10 +197,11 @@ export default {
       clickedTime: '-',
       clickedAvail: 0,
       clickedRowObj: null,
-      scaleValue: 5, /* 5 is the default size. Allows +/-5 scaling in both directions */
-      dateToDisplay: Date.now(), // default to current date/time
-      dateToDisplayCalVisible: false,
+      scaleValue: 5, // 5 is the default size. Allows +/-5 scaling in both directions
+      dateToDisplay: Date.now(),
+
       exceededMaxNrPeopleDialogActive: false,
+      continueBtnDisabled: true,
       timesArray: [
         { id: 1, time: '08:30', avail: 6 },
         { id: 2, time: '10:15', avail: 1 },
@@ -235,29 +236,20 @@ export default {
       this.clickedTime = eTime
       this.clickedAvail = eAvail
       this.clickedRowObj = eRowEl
-      console.log(eRowEl)
+      // console.log(eRowEl)
       // Enable the CONTINUE btn
+      this.continueBtnDisabled = false
     },
 
     // Testing harness junk below here...
-
-    toggleCalendarPopup: function () {
-      // as cal data is bound, we don't need to handle anything here! Cool.
-      // console.log('cal click')
-      if (this.dateToDisplayCalVisible) {
-        // Calendar is visible, close it.
-      } else {
-        // Show Calendar.
-
-      }
-      // this.dateToDisplayCalVisible = !this.dateToDisplayCalVisible
-      // console.log('cal visible: ' + this.dateToDisplayCalVisible)
-    },
     onNrPplClick (e) {
       this.bookingNrOfPeople = parseInt(e.target.textContent, 10) // Uses the string label to set nr of people.
       // Update the DayList show correct enabled/disabled rows.
       // console.log('Nr People: ' + this.bookingNrOfPeople)
       this.$refs.dayList1.changedGroupSize(this.bookingNrOfPeople)
+      // Enable the CONTINUE btn if there's a valid 'selected' DayListItem row
+      if (this.$refs.dayList1.selectedRowObj) this.continueBtnDisabled = true
+      // console.log(this.$children)
     },
     onTooManyPeople (e) {
       this.bookingNrOfPeople = this.maxPeoplePerBooking
@@ -272,10 +264,14 @@ export default {
       // console.log('catching close dialog ev')
     },
     calUpdateProxy () {
-      this.proxyDate = this.date
+      // console.log(this.dateToDisplay)
+      // this.proxyDate = this.dateToDisplay
     },
-    calSave () {
-      this.date = this.proxyDate
+    optionsFn (date) {
+      const minDate = qDate.formatDate(qDate.addToDate(Date.now(), { days: 2 }), 'YYYY/MM/DD')
+      const maxDate = qDate.formatDate(qDate.addToDate(Date.now(), { year: 1 }), 'YYYY/MM/DD')
+      // console.log('MinDate: ' + minDate + '  MaxDate: ' + maxDate)
+      return date >= minDate && date <= maxDate
     }
   }
 }

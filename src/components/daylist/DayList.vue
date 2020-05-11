@@ -73,7 +73,8 @@ export default {
   data () {
     return {
       displayDayStr: '',
-      bookingNrPeople: this.nrPeople
+      bookingNrPeople: this.nrPeople,
+      selectedRowObj: null
     }
   },
   methods: {
@@ -82,12 +83,13 @@ export default {
     // el holds the Dom object that was clicked on (DayListItem)
     onRowClick: function (timeSlot, dayListIem) {
       // console.log(el)
-      console.log('Clicked on TimeSlot id: ' + timeSlot.id + '. Time: ' + timeSlot.time + '. Availability: ' + timeSlot.avail + ' Event: ' + dayListIem)
+      // console.log('Clicked on TimeSlot id: ' + timeSlot.id + '. Time: ' + timeSlot.time + '. Availability: ' + timeSlot.avail + ' Event: ' + dayListIem)
       // let's save the clicked row for future ref (ie a Method call 'getSelectedRow')
       // We also need to loop through the other items and deselect any preveiously selected rows.
       for (const item of this.$refs.items) {
         if (item === dayListIem) {
           item.select()
+          this.selectedRowObj = item
         } else {
           item.deselect()
         }
