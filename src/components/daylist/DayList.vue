@@ -13,26 +13,41 @@
       <div id="dlh-text-subtitle1" style="font-weight:bold;">{{getDisplaySubtitleDateStr}}</div>
     </q-card-section>
 
-    <DayListItem
-      class="item"
-      :id = "timeSlot.id"
-      v-for = "timeSlot in timeSlots"
-      v-bind:key = "timeSlot.id"
-      v-on:row-click = "onRowClick(timeSlot, $event)"
-      :disable-row = "initializeRow(timeSlot.avail)"
-      ref="items"
-      :avail="timeSlot.avail"
-    >
-      <template v-slot:time>
-        <span style="color:maroon">*</span>
-        {{getHours(timeSlot.time)}}<span class="itemMinutes">:{{getMins(timeSlot.time)}}</span>
-      </template>
-      <template v-slot:message>
-        <q-icon class="icon" name="check_circle" color="gray" size="1.3em" style="padding-right:0.5em;"/>
-        {{timeSlot.avail}} places available
-      </template>
+    <div style="">
+      <DayListItem
+        class="item"
+        :id = "timeSlot.id"
+        v-for = "timeSlot in timeSlots"
+        v-bind:key = "timeSlot.id"
+        v-on:row-click = "onRowClick(timeSlot, $event)"
+        :disable-row = "initializeRow(timeSlot.avail)"
+        ref="items"
+        :avail="timeSlot.avail"
+        :bookedNr="nrPeople"
+      >
+        <template v-slot:time>
+          <span style="color:maroon">*</span>
+          {{getHours(timeSlot.time)}}<span class="itemMinutes">:{{getMins(timeSlot.time)}}</span>
+        </template>
 
-    </DayListItem>
+        <template v-slot:message>
+          <div :id="'defaultMsg-' + timeSlot.id">
+            <q-chip class="itemMessage q-my-none ellipsis" color="white" size="0.9em">
+              <q-icon class="icon" name="check_circle" color="gray" size="1.3em" style="padding-right:0.5em;"/>
+              {{timeSlot.avail}} places available
+            </q-chip>
+          </div>
+          <!-- this is shown when a row is selected. Background is green, so use white icon -->
+          <div :id="'bookedMsg-' + timeSlot.id" class="hidden">
+            <q-chip class="itemMessageSelected q-my-none ellipsis" color="positive" text-color="white" size="0.9em" style="font-weight:bolder;">
+              <q-icon class="icon" name="add_circle_outline" color="white" size="1.3em" style="padding-right:0.5em;"/>
+              {{nrPeople}} SELECTED
+            </q-chip>
+          </div>
+        </template>
+
+      </DayListItem>
+    </div>
 
     <p id="availabilityTimeMsg">&nbsp;</p>
 
@@ -65,10 +80,20 @@ export default {
     // Called when user clicks on the DayListItem sub component.
     // 'timeSlot' contains the clicked Row's data from the TimeSlots array.
     // el holds the Dom object that was clicked on (DayListItem)
-    onRowClick: function (timeSlot, el) {
+    onRowClick: function (timeSlot, dayListIem) {
       // console.log(el)
-      // console.log('Clicked on TimeSlot id: ' + timeSlot.id + '. Time: ' + timeSlot.time + '. Availability: ' + timeSlot.avail + ' Event: ' + el)
-      this.$emit('row-selected', timeSlot.id, timeSlot.time, timeSlot.avail, el)
+      console.log('Clicked on TimeSlot id: ' + timeSlot.id + '. Time: ' + timeSlot.time + '. Availability: ' + timeSlot.avail + ' Event: ' + dayListIem)
+      // let's save the clicked row for future ref (ie a Method call 'getSelectedRow')
+      // We also need to loop through the other items and deselect any preveiously selected rows.
+      for (const item of this.$refs.items) {
+        if (item === dayListIem) {
+          item.select()
+        } else {
+          item.deselect()
+        }
+      }
+      // Let the Parent container react to having a row selected
+      this.$emit('row-selected', timeSlot.id, timeSlot.time, timeSlot.avail, dayListIem)
     },
     getHours: function (timeStr) {
       // split timeStr on the colon ':' or throw error.
@@ -147,7 +172,7 @@ export default {
   padding-right: 0.4em;
   padding-bottom: 0.2em;
 
-  border-bottom: 0.1em rgb(255, 255, 255) solid;
+  border-bottom: 0.15em rgb(255, 255, 255) solid;
 }
 
   div.item:last-child {

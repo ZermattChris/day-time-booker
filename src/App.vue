@@ -223,7 +223,6 @@ export default {
       this.clickedAvail = eAvail
       this.clickedRowObj = eRowEl
       // console.log(eRowEl)
-      // this.toggleRow()
     },
 
     // Testing harness junk below here...
@@ -275,8 +274,11 @@ export default {
     placement in the parent container, just by tweaking the below
   ---------------------------------------------------------------- */
   #DTBContainer {
+    /* Use the following two for scalable component size */
     font-size: var(--scale-font-size);
     width: 25em;
+
+    /* Use these two for a fixed size */
     /* 18px is a reasonable font-size default */
     /* font-size: 18px; */
     /* 380px is a reasonable width default. Remove and the DTBooker will fill the parent's box. */
