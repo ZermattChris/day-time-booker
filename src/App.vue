@@ -20,7 +20,7 @@
         />
       </div>
 
-      <!-- Extra div to try and center on page. reload it... -->
+      <!-- Extra div to try and center on page. -->
       <div style="padding:20px 5px; background:url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAoAAAAKCAIAAAACUFjqAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAB3RJTUUH3ggRDQENU0dyawAAACZJREFUGNNjPHXqDAMSMDY2ROYyMeAFNJVm/Pv3LzL/7Nnzg8VpAKebCGpIIxHBAAAAAElFTkSuQmCC);">
 
         <!-- START: DayTimeBooker Component -->
