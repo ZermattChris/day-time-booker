@@ -50,8 +50,18 @@
         <a href="#">FlyZermatt office</a>.
       </p>
 
+      <!-- Add in the BACK and CONTINUE buttons and activate them according to date from component -->
+      <div class="row">
+        <div class="col"></div>
+        <div class="col-6">
+          <q-btn id="backBtn" color="primary" label="Back" disable class="float-left"/>
+          <q-btn id="continueBtn" color="primary" label="Continue" disable class="float-right"/>
+        </div>
+        <div class="col"></div>
+      </div>
+
       <!-- Give a bunch of data from when the user selects a TimeSlot -->
-      <div class="q-pa-xs shadow-4" style="background-color:lightgray; border-color:black;" bordered>
+      <div class="q-mt-lg q-pa-xs shadow-4" style="background-color:lightgray; border-color:black;" bordered>
 
         <div class="text-h4 text-weight-bold q-ml-auto q-mr-auto" style="text-align:center; color:teal;">bSoftware's<br />DayTimeBooker Playpen</div>
 
@@ -225,7 +235,8 @@ export default {
       this.clickedTime = eTime
       this.clickedAvail = eAvail
       this.clickedRowObj = eRowEl
-      // console.log(eRowEl)
+      console.log(eRowEl)
+      // Enable the CONTINUE btn
     },
 
     // Testing harness junk below here...
