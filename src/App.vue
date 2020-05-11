@@ -1,24 +1,24 @@
 <template>
   <div id="q-app" class="q-pa-md">
 
-    <div class="text-h4 text-weight-bold q-ml-auto q-mr-auto" style="text-align:center; color:teal;">bSoftware's<br />DayTimeBooker Playpen</div>
+      <div class="q-pa-md">   <!-- A Scale slider to test the font-scaling. xxxxx -->
+        <!-- <q-badge color="teal" class="q-pa-md" outline>
+          Scale: <strong>{{ scaleValue }}</strong>
+        </q-badge> -->
 
-    <div class="q-pa-md">   <!-- A Scale slider to test the font-scaling. xxxxx -->
-      <q-badge color="teal" class="q-pa-md" outline>
-        Scale: <strong>{{ scaleValue }}</strong>
-      </q-badge>
-
-      <q-slider
-        v-model="scaleValue"
-        :min="1"
-        :max="10"
-        :step="1"
-        snap
-        markers
-        label
-        color="teal"
-      />
-    </div>
+        <q-slider
+          v-model="scaleValue"
+          :min="1"
+          :max="10"
+          :step="1"
+          snap
+          markers
+          label
+          :label-value="'Scale: ' + scaleValue"
+          label-always
+          color="teal"
+        />
+      </div>
 
       <!-- Extra div to try and center on page -->
       <div style="background-color:silver; padding:20px 5px;">
@@ -52,6 +52,9 @@
 
       <!-- Give a bunch of data from when the user selects a TimeSlot -->
       <div class="q-pa-xs shadow-4" style="background-color:lightgray; border-color:black;" bordered>
+
+        <div class="text-h4 text-weight-bold q-ml-auto q-mr-auto" style="text-align:center; color:teal;">bSoftware's<br />DayTimeBooker Playpen</div>
+
         <div class="q-pa-xs" style="color:maroon; font-weight:bold;">
           Info:
         </div>
