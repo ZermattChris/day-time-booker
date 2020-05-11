@@ -1,19 +1,19 @@
 <template>
 
-  <q-card id="DayList"
+  <q-list id="DayList"
     class="text-white shadow-4"
     style=""
     dense
     bordered
   >
-    <q-card-section id="DLHead"
+    <div id="DLHead"
       class="center text-shadow-2"
     >
       <div id="dlh-text-h4" style="font-weight:bold;">{{getDisplayDay}}</div>
       <div id="dlh-text-subtitle1" style="font-weight:bold;">{{getDisplaySubtitleDateStr}}</div>
-    </q-card-section>
+    </div>
 
-    <div style="">
+    <div style="background-color:rgb(205,205,225);">
       <DayListItem
         class="item"
         :id = "timeSlot.id"
@@ -51,7 +51,7 @@
 
     <p id="availabilityTimeMsg">&nbsp;</p>
 
-  </q-card>
+  </q-list>
 
 </template>
 
@@ -83,7 +83,7 @@ export default {
     // el holds the Dom object that was clicked on (DayListItem)
     onRowClick: function (timeSlot, dayListIem) {
       // console.log(el)
-      // console.log('Clicked on TimeSlot id: ' + timeSlot.id + '. Time: ' + timeSlot.time + '. Availability: ' + timeSlot.avail + ' Event: ' + dayListIem)
+      console.log('Clicked on TimeSlot id: ' + timeSlot.id + '. Time: ' + timeSlot.time + '. Availability: ' + timeSlot.avail + ' Event: ' + dayListIem)
       // let's save the clicked row for future ref (ie a Method call 'getSelectedRow')
       // We also need to loop through the other items and deselect any preveiously selected rows.
       for (const item of this.$refs.items) {
@@ -164,7 +164,7 @@ export default {
 
 /* This is each specific row box */
 .item {
-  background: rgb(240, 240, 240);
+  background: rgb(255, 255, 255);
   font-size: 1.3em;
 
   border-radius: 0;
@@ -174,7 +174,8 @@ export default {
   padding-right: 0.4em;
   padding-bottom: 0.2em;
 
-  border-bottom: 0.15em rgb(255, 255, 255) solid;
+  margin-bottom: 1px;
+  /* border-bottom: 0.15em rgb(255, 255, 255) solid; */
 }
 
   div.item:last-child {

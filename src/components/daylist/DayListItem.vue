@@ -1,17 +1,19 @@
 <template>
-    <q-card
+    <q-item
+     clickable
       @click="onClickedRow"
+      class="disable-text-selection"
       v-bind:class="[{ 'disabled': disabledRow, 'hiliteRow': selected }]"
     >
-      <div class="itemRow row disable-text-selection">
-        <div class="itemTime col-3 center">
-          <slot name="time"></slot>
-        </div>
-        <div class="col center" style="letter-spacing:0.005em;">
-          <slot name="message"></slot>
-        </div>
-      </div>
-    </q-card>
+      <q-item-section style="display:inline; text-align:center;" class="itemTime col-3">
+        <slot name="time"></slot>
+      </q-item-section>
+
+      <q-item-section style="display:inline;">
+        <slot name="message"></slot>
+      </q-item-section>
+
+    </q-item>
 </template>
 
 <script>
@@ -32,6 +34,7 @@ export default {
   ],
   methods: {
     onClickedRow: function (e) {
+      console.log('clicked row')
       // console.log(!this.disabledRow)
       if (!this.disabledRow) {
         this.$emit('row-click', this) // only fire event if this item is enabled!
@@ -71,15 +74,15 @@ export default {
 </script>
 
 <style scoped>
-  .q-card {
+  .q-item {
     color: black;
   }
-  .q-card:hover {
+  .q-item:hover {
     cursor: pointer;
-    background-color: rgb(239, 241, 255);
+    background-color: rgb(255, 255, 255);
   }
-  /* .q-card.disabled,
-  .q-card.disabled > .q-chip {
+  /* .q-item.disabled,
+  .q-item.disabled > .q-chip {
     opacity: 1 !important;
     background-color: rgb(131, 131, 131) !important;
   } */
