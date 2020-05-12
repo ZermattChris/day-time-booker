@@ -34,7 +34,7 @@ export default {
   ],
   methods: {
     onClickedRow: function (e) {
-      console.log('clicked row')
+      // console.log('clicked row')
       // console.log(!this.disabledRow)
       if (!this.disabledRow) {
         this.$emit('row-click', this) // only fire event if this item is enabled!
@@ -75,6 +75,7 @@ export default {
 
 <style scoped>
   .q-item {
+    min-height: unset;
     color: black;
   }
   .q-item:hover {
